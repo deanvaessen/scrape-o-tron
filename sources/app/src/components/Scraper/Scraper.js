@@ -26,11 +26,11 @@ class Scraper {
     scrape = parameters => {
         const { scrapers } = this.dependencies;
         const { query, scraperName } = parameters;
-        let fields = {};
+        const fields = [];
 
         for ( const key in parameters ) {
             if ( key.includes( "field"  ) ) {
-                fields[key] = parameters[key];
+                fields.push( parameters[key] );
             }
         }
 

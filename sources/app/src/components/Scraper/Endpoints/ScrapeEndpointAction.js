@@ -25,7 +25,9 @@ class ScrapeEndpointAction {
     /**
      * Finishes the current action
      *
-     * @param {array} result - An array of objects with slug and label of the scraper
+     * @param {Object[]} result - An array of objects with slug and label of the scraper
+     * @param {Object[]} result[].slug - Scraper slug
+     * @param {Object[]} result[].label - Scraper label
      *
      * @returns {promise}
      * @memberof ScrapeEndpointAction

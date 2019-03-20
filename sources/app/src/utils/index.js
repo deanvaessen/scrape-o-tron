@@ -6,6 +6,7 @@ import path from "path";
 import request from "request-promise-native";
 import expressServer from "express";
 import sanitize from "sanitize";
+import cheerio from "cheerio";
 import Job from "./Job";
 
 class Utils {
@@ -19,6 +20,7 @@ class Utils {
             path,
             sanitize,
             Job,
+            $ : cheerio,
             expressServer
         };
     }

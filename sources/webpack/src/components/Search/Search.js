@@ -69,6 +69,20 @@ class Search extends Component {
     }
 
     /**
+     * Handles the form submission
+     *
+     * @param {event} e
+     * @memberof Search
+     */
+    handleFormSubmit = e => {
+        const { searchQuery, activeSearchEngine } = this.state;
+        const { performSearch } = this.props;
+
+        e.preventDefault();
+        performSearch( searchQuery, activeSearchEngine );
+    }
+
+    /**
      * Sets the current active search engine
      *
      * @memberof Search
@@ -76,14 +90,14 @@ class Search extends Component {
     selectSearchEngine = searchEngine => this.setState( { activeSearchEngine : searchEngine } )
 
     render() {
-        const { performSearch, reset } = this.props;
-        const { searchQuery, activeSearchEngine } = this.state;
+        const { reset } = this.props;
+        const { searchQuery } = this.state;
 
         return (
             <div className="text-center">
                 <FaSearchengin className="mb-5" size={100} />
 
-                <Form>
+                <Form onSubmit={this.handleFormSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridCity">
                             <Form.Control
@@ -102,7 +116,7 @@ class Search extends Component {
                         </Form.Group>
                     </Form.Row>
 
-                    <Button variant="primary" onClick={ () => performSearch( searchQuery, activeSearchEngine ) }><FaSistrix size={20} className="mr-1" /> Search</Button>
+                    <Button variant="primary" type="submit"><FaSistrix size={20} className="mr-1" /> Search</Button>
                     <Button className="ml-2" variant="danger" onClick={reset}><FaUndo size={15} className="mr-2" />Reset</Button>
                 </Form>
             </div>

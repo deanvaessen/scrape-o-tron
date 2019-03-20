@@ -24,7 +24,7 @@ class ScrapeEndpoint {
             const parameters = {
                 ...req.query,
                 scraperName,
-                query : decodeURIComponent( req.query.query )
+                query : req.query.query
             };
 
             const payload = {
