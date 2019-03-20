@@ -39,7 +39,8 @@ class Scraper {
         if ( !scraper ) throw Error( "Unknown scraper!" );
 
         return scraper.fetch( query )
-            .then( result => scraper.parse( result, fields ) );
+            .then( result => scraper.parse( result, fields ) )
+            .then( results => this.sortAlphabetically( results ) );
     }
 
     /**
@@ -49,6 +50,23 @@ class Scraper {
      * @memberof Scraper
      */
     getAvailableScrapers = () => Promise.resolve( this.config.SCRAPERS );
+
+    /**
+     * @param {Object[]} - results
+     * @param {string} - results[].title
+     * @param {string} - results[].name
+     *
+     * @returns {Object[]}
+     * @memberof Scraper
+     */
+    sortAlphabetically = ( results ) => {
+
+        return results.sort( ( a, b ) => {
+            if( a.title.toLowerCase() < b.title.toLowerCase() ) return -1;
+            if( a.title.toLowerCase() > b.title.toLowerCase() ) return 1;
+            return 0;
+        } );
+    }
 }
 
 export default Scraper;

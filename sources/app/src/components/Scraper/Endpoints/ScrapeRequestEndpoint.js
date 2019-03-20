@@ -1,10 +1,10 @@
 /**
- * ScrapeEndpoint.js
+ * ScrapeRequestEndpoint.js
  *
  * The endpoint that will allow the front-end to request the scrape. The action itself is decoupled and fed into the endpoint.
  */
 
-class ScrapeEndpoint {
+class ScrapeRequestEndpoint {
     constructor( dependencies, config ) {
         this.dependencies = dependencies;
         this.config = config;
@@ -15,8 +15,8 @@ class ScrapeEndpoint {
 
         console.log( "Intialising endpoint /api/scrape" );
 
-        //.e.g: /api/scraper/duckduckgo?query=mySearchInput&field1=title&field2=url
-        express.get( "/api/scrape/:scraperName", ( req, res ) => {
+        //.e.g: /api/scrapers/duckduckgo?query=mySearchInput&field1=title&field2=url
+        express.get( "/api/scrapers/:scraperName", ( req, res ) => {
             const { scraperName } = req.params;
 
             console.log( "info", `Scraper endpoint - Request for scraper ${scraperName}` );
@@ -43,4 +43,4 @@ class ScrapeEndpoint {
     }
 }
 
-module.exports = ScrapeEndpoint;
+module.exports = ScrapeRequestEndpoint;
