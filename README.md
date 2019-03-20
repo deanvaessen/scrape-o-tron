@@ -1,5 +1,5 @@
 # Prep
-Create a `.env` file (see `.env.dist`) in this root directory with your environment. In it, you set your `NODE_ENV` that represents the production environment, e.g.:
+Create a `.env` file (see `.env.dist`) in this root directory with your environment. In it, you set your `NODE_ENV` that represents your intended environment, e.g.:
 `NODE_ENV=dev`
 
 Edit the configuration file for your environment (e.g: `prod.json`/`dev.json`) in the config folder. See `config.json.dist`.
