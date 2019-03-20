@@ -1,25 +1,25 @@
 /**
- * ScrapersEndpointAction.js
+ * ScrapeRequestEndpointAction.js
  *
- * This action returns an array of the available scrapers
+ * Calls the scrapers to process a request
  */
 
-class ScrapersEndpointAction {
+class ScrapeRequestEndpointAction {
     constructor( dependencies, parameters ) {
         this.dependencies = dependencies;
         this.parameters = parameters;
     }
 
     /**
-     * Launches the request to get the available scrapers
+     * Launches the scrape
      *
      * @returns {promise}
-     * @memberof ScrapersEndpointAction
+     * @memberof ScrapeRequestEndpointAction
      */
     launch = () => {
         const { scraper } = this.dependencies;
 
-        return scraper.getAvailableScrapers( this.parameters );
+        return scraper.scrape( this.parameters );
     }
 
     /**
@@ -30,7 +30,7 @@ class ScrapersEndpointAction {
      * @param {Object[]} result[].label - Scraper label
      *
      * @returns {promise}
-     * @memberof ScrapersEndpointAction
+     * @memberof ScrapeRequestEndpointAction
      */
     finish = ( result ) => {
         const { job } = this.dependencies;
@@ -39,4 +39,4 @@ class ScrapersEndpointAction {
     }
 }
 
-module.exports = ScrapersEndpointAction;
+module.exports = ScrapeRequestEndpointAction;

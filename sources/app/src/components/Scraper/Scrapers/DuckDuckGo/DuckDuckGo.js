@@ -38,7 +38,7 @@ class DuckDuckGo {
      * @param {string} result - Html string of the fetch response
      * @param {String[]} fields - Requested fields
      *
-     * @returns {array}
+     * @returns {Object[]}
      * @memberof DuckDuckGo
      */
     parse = ( result, fields ) => {
@@ -54,7 +54,7 @@ class DuckDuckGo {
             url = url.join( "" );
 
             if ( fields.includes( "title" ) ) hit.title = title;
-            if ( fields.includes( "url" ) ) hit.url = url;
+            if ( fields.includes( "url" ) )  hit.url = url;
 
             hits.push( hit );
         } );

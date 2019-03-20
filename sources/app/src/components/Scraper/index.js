@@ -8,18 +8,18 @@
  */
 
 import Component from "./Scraper";
-import ScrapersEndpoint from "./Endpoints/ScrapersEndpoint";
-import ScrapersEndpointAction from "./Endpoints/ScrapersEndpointAction";
-import ScrapeEndpointAction from "./Endpoints/ScrapeEndpointAction";
-import ScrapeEndpoint from "./Endpoints/ScrapeEndpoint";
+import ScrapeInfoEndpoint from "./Endpoints/ScrapeInfoEndpoint";
+import ScrapeInfoEndpointAction from "./Endpoints/ScrapeInfoEndpointAction";
+import ScrapeRequestEndpointAction from "./Endpoints/ScrapeRequestEndpointAction";
+import ScrapeRequestEndpoint from "./Endpoints/ScrapeRequestEndpoint";
 import DuckDuckGoScraper from "./Scrapers/DuckDuckGo";
 
 class Scraper {
     constructor( dependencies, config ) {
         this.dependencies = dependencies;
         this.config = config;
-        this.scrapeEndpoint;
-        this.scrapersEndpoint;
+        this.scrapeRequestEndpoint;
+        this.scrapeInfoEndpoint;
         this.component;
     }
 
@@ -43,18 +43,18 @@ class Scraper {
             }
         }, this.config );
 
-        this.scrapeEndpoint = new ScrapeEndpoint(
+        this.scrapeRequestEndpoint = new ScrapeRequestEndpoint(
             {
                 ...this.dependencies,
-                EndpointAction : ScrapeEndpointAction
+                EndpointAction : ScrapeRequestEndpointAction
             },
             this.config
         );
 
-        this.scrapersEndpoint = new ScrapersEndpoint(
+        this.scrapeInfoEndpoint = new ScrapeInfoEndpoint(
             {
                 ...this.dependencies,
-                EndpointAction : ScrapersEndpointAction
+                EndpointAction : ScrapeInfoEndpointAction
             },
             this.config
         );
@@ -62,8 +62,8 @@ class Scraper {
 
     init = () => {
         this.component.init();
-        this.scrapeEndpoint.init();
-        this.scrapersEndpoint.init();
+        this.scrapeRequestEndpoint.init();
+        this.scrapeInfoEndpoint.init();
     }
 
     /**

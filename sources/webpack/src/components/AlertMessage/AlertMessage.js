@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 import "./AlertMessage.scss";
 import { FaExclamationTriangle } from "react-icons/fa";
 
-export default class AlertMessage extends React.PureComponent {
+class AlertMessage extends React.PureComponent {
     static propTypes = {
         variant : PropTypes.string.isRequired,
         intro : PropTypes.string.isRequired,
@@ -61,3 +61,5 @@ export default class AlertMessage extends React.PureComponent {
         );
     }
 }
+
+export default AlertMessage;

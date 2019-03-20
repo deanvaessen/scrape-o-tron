@@ -6,6 +6,7 @@
 
 import React, { Component } from "react";
 import { Col, Row } from "react-bootstrap";
+import ResultsOverview from "../ResultsOverview";
 import Search from "../Search";
 import LoadingIndicator from "../LoadingIndicator";
 import AlertMessage from "../AlertMessage";
@@ -17,6 +18,7 @@ class App extends Component {
     };
 
     initialState = {
+        requestedFields : [ "title", "url" ],
         isFetchingResults : false,
         isFetchingSearchEngines : false,
         searchEngines : [],
@@ -55,7 +57,7 @@ class App extends Component {
 
         this.setState( { isFetchingSearchEngines : true } );
 
-        fetch( `http://localhost:${config.PORT_REST}/api/scrapers` )
+        fetch( `http://${config.HOST}:${config.PORT_REST}/api/scrapers` )
             .then( res => {
                 if ( !res.ok ) throw res;
 
@@ -63,6 +65,12 @@ class App extends Component {
             } )
             .then( data => this.setState( { searchEngines : data, isFetchingSearchEngines : false } ) )
             .catch( err => {
+                if ( err.bodyUsed === undefined ) {
+                    this.setState( { err : err.message, searchEngines : [], isFetchingSearchEngines : false } );
+
+                    return;
+                }
+
                 err.text()
                     .then( message => this.setState( { err : message, searchEngines : [], isFetchingSearchEngines : false } ) );
             } );
@@ -76,11 +84,15 @@ class App extends Component {
      * @memberof App
      */
     performSearch = ( query, searchEngine ) => {
+        const { requestedFields } = this.state;
         const { config } = this.props;
 
         this.setState( { err : null, searchResults : [], isFetchingResults : true } );
+        const url = `http://${config.HOST}:${config.PORT_REST}/api/scrapers/${searchEngine}`
+        + `?query=${encodeURIComponent( query )}`
+        + `${requestedFields.map( ( field, index ) => `&field${index+1}=${field}` ).join( "" ) }`;
 
-        fetch( `http://localhost:${config.PORT_REST}/api/scrape/${searchEngine}?query=${encodeURIComponent( query )}&field1=title&field2=url` )
+        fetch( url )
             .then( res => {
                 if ( !res.ok ) throw res;
 
@@ -88,6 +100,14 @@ class App extends Component {
             } )
             .then( data => this.setState( { searchResults : data, isFetchingResults : false } ) )
             .catch( err => {
+                console.log( err );
+                console.log( err.bodyUsed );
+                if ( err.bodyUsed === undefined ) {
+                    this.setState( { err : err.message, searchResults : [], isFetchingResults : false } );
+
+                    return;
+                }
+
                 err.text()
                     .then( message => this.setState( { err : message, searchResults : [], isFetchingResults : false } ) );
             } );
@@ -101,7 +121,7 @@ class App extends Component {
     reset = () => this.setState( this.initialState )
 
     render() {
-        const { err, isFetchingSearchEngines, isFetchingResults, searchEngines } = this.state;
+        const { err, isFetchingSearchEngines, isFetchingResults, searchEngines, searchResults, requestedFields } = this.state;
 
         return (
             <div className="App">
@@ -126,9 +146,23 @@ class App extends Component {
                             reset={this.reset}
                             searchEngines={searchEngines}
                             performSearch={this.performSearch}
-                        />;
+                        />
                     </Col>
                 </Row>
+
+                {
+                    searchResults.length > 0 &&
+                    (
+                        <Row>
+                            <Col sm={12} md={8} className="mt-2 p-5 mx-auto">
+                                <ResultsOverview
+                                    fields={requestedFields}
+                                    results={searchResults}
+                                />
+                            </Col>
+                        </Row>
+                    )
+                }
 
                 {
                     ( isFetchingSearchEngines || isFetchingResults ) &&

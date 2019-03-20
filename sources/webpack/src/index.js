@@ -12,7 +12,10 @@ import config from "./config/config.json";
 
 ReactDOM.render(
     <App
-        config={config}
+        config={{
+            ...config,
+            HOST : window.location.host.split( ":" )[0]
+        }}
     />
     , document.getElementById( "root" )
 );

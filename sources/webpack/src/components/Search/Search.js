@@ -79,6 +79,9 @@ class Search extends Component {
         const { performSearch } = this.props;
 
         e.preventDefault();
+
+        if ( searchQuery.length === 0 ) return;
+
         performSearch( searchQuery, activeSearchEngine );
     }
 
@@ -116,7 +119,7 @@ class Search extends Component {
                         </Form.Group>
                     </Form.Row>
 
-                    <Button variant="primary" type="submit"><FaSistrix size={20} className="mr-1" /> Search</Button>
+                    <Button disabled={searchQuery.length === 0} variant="primary" type="submit"><FaSistrix size={20} className="mr-1" /> Search</Button>
                     <Button className="ml-2" variant="danger" onClick={reset}><FaUndo size={15} className="mr-2" />Reset</Button>
                 </Form>
             </div>

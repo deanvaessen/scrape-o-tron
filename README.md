@@ -1,13 +1,32 @@
+
+![Screenshot](image.png?raw=true "Screenshot")
+
 # Prep
 Create a `.env` file (see `.env.dist`) in this root directory with your environment. In it, you set your `NODE_ENV` that represents your intended environment, e.g.:
 `NODE_ENV=dev`
 
 Edit the configuration file for your environment (e.g: `prod.json`/`dev.json`) in the config folder. See `config.json.dist`.
 
-@TODO: Installing packages
+Make sure the port you add in the config file matches the port in `docker-compose.yaml`!
+
+* PROD:
+1. Execute: `docker-compose run app npm i`
+1. Execute: `docker-compose run webpack npm i`
+
+* DEV:
+1. Execute: `docker-compose run app npm i`
+1. Execute: `cd sources/webpack && npm i`
 
 # How to run
-@TODO: ...
+* PROD:
+1. Execute: `docker-compose up webpack` and wait for it to build and exit
+1. Execute: `docker-compose up app`
+1. Visit the application at the configured port (default: `4001`), see `docker-compose.yaml` and config/`*env*.json`
+
+* DEV:
+1. Execute: `docker-compose run app npm i`
+1. Execute: `cd sources/webpack && npm i`
+1. Visit the application at the configured port (default: `4001`), see `docker-compose.yaml` and config/`*env*.json`
 
 # General notes:
 * I did not add authentication between back-end and front-end. JWT tokens would be a good match for this

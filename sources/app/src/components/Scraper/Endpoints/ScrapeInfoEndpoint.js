@@ -1,10 +1,10 @@
 /**
- * scrapers_endpoint.js
+ * ScrapeInfoEndpoint.js
  *
  * The endpoint that will allow the front-end to request the scrape. The actual action is decoupled and fed into the endpoint.
  */
 
-class Endpoint {
+class ScrapeInfoEndpoint {
     constructor( dependencies, config ) {
         this.dependencies = dependencies;
         this.config = config;
@@ -31,4 +31,4 @@ class Endpoint {
     }
 }
 
-module.exports = Endpoint;
+module.exports = ScrapeInfoEndpoint;
