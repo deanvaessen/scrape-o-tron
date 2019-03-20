@@ -121,7 +121,7 @@ class App extends Component {
                 }
 
                 <Row>
-                    <Col sm={12} className="p-5">
+                    <Col sm={12} md={8} className="p-5 mx-auto">
                         <Search
                             reset={this.reset}
                             searchEngines={searchEngines}

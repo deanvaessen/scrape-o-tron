@@ -1,3 +1,10 @@
 {
     "PORT_REST" : Add your port to receive requests here, i.e. 3000
+    "SCRAPERS" : [
+        {
+            "slug" : "duckduckgo",
+            "label" : "DuckDuckGo"
+        },
+        ...
+    ]
 }

@@ -1,7 +1,7 @@
 /**
  * DuckDuckGo.js
  *
- * Implementation of a scraper tailered to DuckDuckGo.
+ * Implementation of a scraper tailored to DuckDuckGo.
  * Fetches, and parses a request.
  *
  * @class DuckDuckGo
@@ -21,7 +21,7 @@ class DuckDuckGo {
      * @returns {promise}
      * @memberof DuckDuckGo
      */
-    fetch( query ) {
+    fetch = query => {
         const { request } = this.dependencies;
 
         return request( {
@@ -29,13 +29,37 @@ class DuckDuckGo {
             headers : {
                 "User-Agent" : "Mozilla/5.0 (Windows NT 6.1; WOW64)"
             }
-        } )
-            .then( result => console.log( result ) );
+        } );
     }
 
-    parse( result ) {
+    /**
+     * Parses the data returned by the fetch method
+     *
+     * @param {string} result - Html string of the fetch response
+     * @param {String[]} fields - Requested fields
+     *
+     * @returns {array}
+     * @memberof DuckDuckGo
+     */
+    parse = ( result, fields ) => {
+        const { $ } = this.dependencies;
+        const hits = [];
 
-        return result + " parsed";
+        $( ".result__title > a", result ).each( ( i, el ) => {
+            const title =  $( el ).text();
+            let hit = {};
+            let url = decodeURIComponent( $( el ).attr( "href" ) ).split( "=http" );
+            url.shift();
+            url.unshift( "http" );
+            url = url.join( "" );
+
+            if ( fields.includes( "title" ) ) hit.title = title;
+            if ( fields.includes( "url" ) ) hit.url = url;
+
+            hits.push( hit );
+        } );
+
+        return hits;
     }
 }
 
