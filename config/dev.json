@@ -1,0 +1,9 @@
+{
+    "PORT_REST" : 4001,
+    "SCRAPERS" : [
+        {
+            "slug" : "duckduckgo",
+            "label" : "DuckDuckGo"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+version: "2.3"
+
+services:
+  app:
+    image: "node:10"
+    ports:
+      - "4001:4001"
+    command: npm run ${NODE_ENV}
+    working_dir: /usr/app
+    volumes:
+      - ./sources/app:/usr/app
+      - ./config/:/usr/app/config
+      - ./volumes/webpack/build:/usr/app/public
+    environment:
+      - NODE_ENV=${NODE_ENV}
+  webpack:
+    image: "node:11"
+    volumes:
+      - ./sources/webpack:/usr/webpack
+      - ./volumes/webpack/build:/usr/webpack/build
+    command: npm run build
+    working_dir: /usr/webpack
