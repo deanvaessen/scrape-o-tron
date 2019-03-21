@@ -100,8 +100,6 @@ class App extends Component {
             } )
             .then( data => this.setState( { searchResults : data, isFetchingResults : false } ) )
             .catch( err => {
-                console.log( err );
-                console.log( err.bodyUsed );
                 if ( err.bodyUsed === undefined ) {
                     this.setState( { err : err.message, searchResults : [], isFetchingResults : false } );
 

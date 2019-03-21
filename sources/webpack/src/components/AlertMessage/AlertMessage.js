@@ -30,7 +30,7 @@ class AlertMessage extends React.PureComponent {
     getClasses = () => {
         const { sizeIsSmall, delay } = this.props;
 
-        return `w-100 mb-0 alertMessage animated fadeInUp ${delay || ""} ${
+        return `w-100 mb-0 alertMessage animated fadeInDown ${delay || ""} ${
             sizeIsSmall ? "alert-small" : ""
         }`;
     };

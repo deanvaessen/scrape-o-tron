@@ -1,3 +1,9 @@
+/**
+ * index.js
+ *
+ * Entry point for the application
+ */
+
 require( "@babel/register" );
 require( "@babel/polyfill" );
 
