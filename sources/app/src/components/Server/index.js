@@ -4,7 +4,7 @@
  * Exposes all public methods and handles loading/initialising of the component.
  */
 
-import Endpoint from "./endpoints/GetHomePage";
+import Endpoint from "./Endpoints/GetHomePage";
 import Component from "./Server";
 
 class Server {
