@@ -28,6 +28,9 @@ Make sure the port you add in the config file matches the port in `docker-compos
 1. Execute: `cd sources/webpack && npm i`
 1. Visit the application at the configured port (default: `4001`), see `docker-compose.yaml` and config/`*env*.json`
 
+* Testing:
+1. The actual scraper for the included example (DuckDuckGo) has tests. To run these, execute `docker-compose run app npm run test`.
+
 # General notes:
 * I did not add authentication between back-end and front-end. JWT tokens would be a good match for this
 * Adding more search engines would be as simple as adding a new scraper in the middleware and adding the corresponding option in components/index.js

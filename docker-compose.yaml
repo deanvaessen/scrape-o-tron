@@ -10,7 +10,8 @@ services:
     volumes:
       - ./sources/app:/usr/app
       - ./config/:/usr/app/config
-      - ./volumes/webpack/build:/usr/app/public
+      - ./sources/webpack/build:/usr/app/public
+      #- ./volumes/webpack/build:/usr/app/public
     environment:
       - NODE_ENV=${NODE_ENV}
   webpack:

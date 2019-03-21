@@ -45,13 +45,21 @@ class DuckDuckGo {
         const { $ } = this.dependencies;
         const hits = [];
 
-        $( ".result__title > a", result ).each( ( i, el ) => {
+        $( ".result__title > .result__a", result ).each( ( i, el ) => {
             const title =  $( el ).text();
             let hit = {};
-            let url = decodeURIComponent( $( el ).attr( "href" ) ).split( "=http" );
-            url.shift();
-            url.unshift( "http" );
-            url = url.join( "" );
+            let url = decodeURIComponent( $( el ).attr( "href" ) );
+
+            /**
+             * Responses made by request have a prefix added by duckduckgo,
+             * but not when the document is examined through the browser.
+             */
+            if ( url.includes( "=http" ) ) {
+                url = url.split( "=http" );
+                url.shift();
+                url.unshift( "http" );
+                url = url.join( "" );
+            }
 
             if ( fields.includes( "title" ) ) hit.title = title;
             if ( fields.includes( "url" ) )  hit.url = url;

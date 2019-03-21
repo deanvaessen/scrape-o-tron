@@ -1,5 +1,6 @@
 {
-    "PORT_REST" : Add your port to receive requests here, i.e. 3000
+    "HOST" : "localhost", // Add the location you will be hosting the application from
+    "PORT_REST" : 4001, // Add your port to receive requests here
     "SCRAPERS" : [
         {
             "slug" : "duckduckgo",

@@ -1,13 +1,14 @@
 {
-    "name": "scraper",
-    "version": "0.1.0",
+    "name": "scrape-o-tron-backend",
+    "version": "1.1.0",
     "scripts": {
         "start": "npm run dev",
         "dev": "cross-env NODE_ENV=dev npm run init-back-dev",
         "staging": "cross-env NODE_ENV=staging npm run init-back-prod",
         "prod": "cross-env NODE_ENV=prod npm run init-back-prod",
         "init-back-prod": "pm2 -f start init_prod.json --no-daemon",
-        "init-back-dev": "pm2 -f start init_dev.json --no-daemon --watch"
+        "init-back-dev": "pm2 -f start init_dev.json --no-daemon --watch",
+        "test": "jest"
     },
     "dependencies": {
         "babel-preset-env": "^1.7.0",
@@ -17,6 +18,7 @@
         "eslint-friendly-formatter": "^2.0.5",
         "eslint-plugin-import": "^1.10.2",
         "express": "^4.16.4",
+        "jest": "^24.5.0",
         "path": "^0.12.7",
         "pm2": "^2.10.4",
         "request": "^2.88.0",
