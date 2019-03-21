@@ -33,7 +33,7 @@ Make sure the port you add in the config file matches the port in `docker-compos
 
 # General notes:
 * I did not add authentication between back-end and front-end. JWT tokens would be a good match for this
-* Adding more search engines would be as simple as adding a new scraper in the middleware and adding the corresponding option in components/index.js
+* Adding more search engines would be as simple as adding a new scraper on the back-end and adding the corresponding option in the config.
 * As it is a rather simple application I have not added any store management such as Redux. Likewise, I have also not added a routing component.
 
 # A note on architecture
