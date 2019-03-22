@@ -11,13 +11,11 @@ services:
       - ./sources/app:/usr/app
       - ./config/:/usr/app/config
       - ./sources/webpack/build:/usr/app/public
-      #- ./volumes/webpack/build:/usr/app/public
     environment:
       - NODE_ENV=${NODE_ENV}
   webpack:
     image: "node:11"
     volumes:
       - ./sources/webpack:/usr/webpack
-      - ./volumes/webpack/build:/usr/webpack/build
     command: npm run build
     working_dir: /usr/webpack
